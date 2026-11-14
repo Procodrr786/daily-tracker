@@ -39,6 +39,13 @@ node_modules
 dist
 dist-ssr
 
+# Capacitor build outputs & local native build files
+android/app/build/
+android/.gradle/
+android/build/
+ios/DerivedData/
+ios/.symlinks/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
