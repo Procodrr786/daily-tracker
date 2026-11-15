@@ -57,25 +57,43 @@ export default function TargetSetup({
 
   return (
     <div className="setup-screen-container">
-      {/* Top-left Crown Badge & Color Swatches (matches reference image) */}
-      <div className="floating-top-left">
-       
-        <div className="color-swatches-group" role="group" aria-label="Accent color theme">
-          {ACCENT_THEMES.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => onSelectAccentColor(t.id)}
-              className={`color-swatch-btn ${accentColor === t.id ? 'color-swatch-active' : ''}`}
-              style={{ backgroundColor: t.primary }}
-              title={`${t.label} theme`}
-              aria-label={`${t.label} color theme`}
-            />
-          ))}
+      {/* Top Bar: Floating on wide desktop, docked cleanly above card on mobile/tablet */}
+      <div className="setup-utility-bar">
+        <div className="floating-top-left">
+          <div className="crown-circle-badge" title="Daily Discipline & Calendar Tracker">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="#f5b041" aria-hidden="true">
+              <path d="M3 18h18v2H3v-2zm0-2l2-9 5 4 2-6 2 6 5-4 2 9H3z" />
+            </svg>
+          </div>
+          <div className="color-swatches-group" role="group" aria-label="Accent color theme">
+            {ACCENT_THEMES.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => onSelectAccentColor(t.id)}
+                className={`color-swatch-btn ${accentColor === t.id ? 'color-swatch-active' : ''}`}
+                style={{ backgroundColor: t.primary }}
+                title={`${t.label} theme`}
+                aria-label={`${t.label} color theme`}
+              ></button>
+            ))}
+          </div>
         </div>
+
+        {/* Bottom-right Floating Sparkle Button on desktop / top-right pill on mobile */}
+        <button
+          type="button"
+          onClick={onToggleThemeMode}
+          className="floating-sparkle-btn theme-toggle-btn"
+          title={themeMode === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          aria-label="Switch between Light and Dark mode"
+        >
+          <span className="sparkle-icon" aria-hidden="true">✦</span>
+          <span className="sparkle-label">{themeMode === 'dark' ? '☀️ Light' : '🌙 Dark'}</span>
+        </button>
       </div>
 
-      {/* Split-Panel Elevated Card (matches reference image) */}
+      {/* Split-Panel Elevated Card */}
       <div className="split-setup-card sketch-card setup-card">
         {/* Left Dark Hero Panel */}
         <div className="split-left-hero">
@@ -89,10 +107,8 @@ export default function TargetSetup({
 
           <div className="hero-headline-block">
             <h2 className="hero-display-text">
-              Start your
-              <br />
-              journey.
-              <br />
+              Start your{' '}
+              <span className="hero-line-break">journey.</span>{' '}
               <span className="hero-display-bold">Today.</span>
             </h2>
           </div>
@@ -150,6 +166,7 @@ export default function TargetSetup({
                 <input
                   id="target-days-input"
                   type="number"
+                  inputMode="numeric"
                   min="1"
                   max="1000"
                   value={targetInput}
@@ -185,7 +202,7 @@ export default function TargetSetup({
               </div>
             </div>
 
-            {/* Read-only Summary Row styled like 3rd underlined line */}
+            {/* Read-only Summary Row */}
             {previewValid && firstDay && lastDay ? (
               <div className="underlined-input-group summary-underlined-row">
                 <span className="input-icon-label" aria-hidden="true">
@@ -208,7 +225,7 @@ export default function TargetSetup({
               </p>
             ) : null}
 
-            {/* Commitment Checkbox Row (matches reference image checkbox) */}
+            {/* Commitment Checkbox Row */}
             <label className="commitment-checkbox-row">
               <input
                 type="checkbox"
@@ -248,18 +265,6 @@ export default function TargetSetup({
           </form>
         </div>
       </div>
-
-      {/* Bottom-right Floating Sparkle Button for Dark/Light Mode (matches reference image) */}
-      <button
-        type="button"
-        onClick={onToggleThemeMode}
-        className="floating-sparkle-btn theme-toggle-btn"
-        title={themeMode === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        aria-label="Switch between Light and Dark mode"
-      >
-        <span className="sparkle-icon" aria-hidden="true">✦</span>
-        <span className="sparkle-label">{themeMode === 'dark' ? '☀️ Light' : '🌙 Dark'}</span>
-      </button>
     </div>
   );
 }

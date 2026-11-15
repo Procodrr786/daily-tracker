@@ -44,11 +44,11 @@ export default function TrackerDashboard({
 
   return (
     <div className="dashboard-container">
-      {/* Top Header with Motivation, Color & Theme Switcher, and Action Buttons */}
+      {/* Top Header with Toolbar, Motivation, and Progress */}
       <header className="dashboard-header sketch-card">
-        <div className="header-top-bar">
-          <Motivation />
-          <div className="header-actions">
+        {/* Row 1: Theme Swatches + Action Buttons */}
+        <div className="dashboard-toolbar">
+          <div className="toolbar-left-group">
             <div className="color-swatches-group" role="group" aria-label="Accent color theme">
               {ACCENT_THEMES.map((t) => (
                 <button
@@ -59,7 +59,7 @@ export default function TrackerDashboard({
                   style={{ backgroundColor: t.primary }}
                   title={`${t.label} theme`}
                   aria-label={`${t.label} color theme`}
-                />
+                ></button>
               ))}
             </div>
 
@@ -71,7 +71,9 @@ export default function TrackerDashboard({
             >
               {themeMode === 'dark' ? '☀️ Light' : '🌙 Dark'}
             </button>
+          </div>
 
+          <div className="header-actions">
             <button
               type="button"
               onClick={onEditSetup}
@@ -91,6 +93,12 @@ export default function TrackerDashboard({
           </div>
         </div>
 
+        {/* Row 2: Motivational Quote Banner */}
+        <div className="header-top-bar">
+          <Motivation />
+        </div>
+
+        {/* Row 3: Date Range Metadata */}
         <div className="header-meta-row">
           <span className="meta-item">
             Start Date: <strong>{formatHumanDate(startDate)}</strong>
@@ -100,11 +108,12 @@ export default function TrackerDashboard({
               End Date: <strong>{lastDay.fullHumanDate}</strong>
             </span>
           ) : null}
-          <span className="meta-item">
-            Click any box to toggle completion
+          <span className="meta-item meta-hint-item">
+            Tap any box to toggle completion
           </span>
         </div>
 
+        {/* Row 4: Progress KPIs & Bar */}
         <ProgressBar
           targetDays={calendarDays.length}
           completedCount={completedSet.size}
