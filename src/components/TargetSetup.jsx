@@ -60,11 +60,6 @@ export default function TargetSetup({
       {/* Top Bar: Floating on wide desktop, docked cleanly above card on mobile/tablet */}
       <div className="setup-utility-bar">
         <div className="floating-top-left">
-          <div className="crown-circle-badge" title="Daily Discipline & Calendar Tracker">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#f5b041" aria-hidden="true">
-              <path d="M3 18h18v2H3v-2zm0-2l2-9 5 4 2-6 2 6 5-4 2 9H3z" />
-            </svg>
-          </div>
           <div className="color-swatches-group" role="group" aria-label="Accent color theme">
             {ACCENT_THEMES.map((t) => (
               <button
